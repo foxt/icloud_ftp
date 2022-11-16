@@ -1,0 +1,27 @@
+{
+  "name": "icloud_fuse",
+  "version": "1.0.0",
+  "description": "iCloud FUSE file system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxt/icloud_fuse.git"
+  },
+  "author": "foxt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxt/icloud_fuse/issues"
+  },
+  "homepage": "https://github.com/foxt/icloud_fuse#readme",
+  "dependencies": {
+    "ftp-srv": "^4.6.2",
+    "icloudjs": "^1.1.0",
+    "input": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9"
+  }
+}
