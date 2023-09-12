@@ -17,17 +17,18 @@ function itemToStat(item: iCloudDriveItem) {
 export class FtpFS extends FileSystem {
     cwd = "/";
     currentDirectory(): string {
-        console.log("currentDirectory")
+        console.log("[ftp-fs]","cwd     ");
         return this.cwd;
     }
     chdir(path?: string): Promise<string> {
-        console.log("chdir", path)
+        console.log("[ftp-fs]","chdir   ", path);
         this.cwd = Path.resolve(this.cwd, path);
         return Promise.resolve(this.cwd);
     }
     async get(path: string) {
+        console.log("[ftp-fs]","stat    ", path);
         path = Path.resolve(this.cwd, path);
-        console.log("stat", path)
+        
         if (path === "/") {
             return {
                 name: "/",
@@ -41,39 +42,45 @@ export class FtpFS extends FileSystem {
         return itemToStat(await getItemByPath(path));
     }
     async list(path: string) {
+        console.log("[ftp-fs]","list    ", path);
         path = Path.resolve(this.cwd, path);
         var node = await getNodeByPath(path);
         return node.items.map(itemToStat);
     }
     write(filename, {append = false, start = undefined}) {
-        console.log("write", filename, append, start)
-        return {
-            write: (data) => {
-                console.log("write", data)
-            }
-        }
+        console.log("[ftp-fs]","write   ", filename, {append,start});
+        console.log(filename,append,start);
+        throw new Error("Writing files not supported");
     }
     async read(path, {start = undefined}) {
-        console.log(this.cwd,path)
+        console.log("[ftp-fs]","read    ", path, start);
         path = Path.resolve(this.cwd, path)
-        console.log("read", path, start)
         if (start) throw new Error("Partial reads not supported");
         return icloudDrive.downloadFile(await getItemByPath(path));
     }
-    async delete (filename) {
-        console.log("delete", filename)
+    async delete (path) {
+        console.log("[ftp-fs]","delete  ", path);
+        if (process.env["ICFTP_ALLOW_DELETE"] !== "true") throw new Error("Deleting files not enabled");
+        path = Path.resolve(this.cwd, path);
+        var item = await getItemByPath(path);
+        await icloudDrive.del(item);
     }
     async mkdir(path: string): Promise<any> {
-        console.log("mkdir", path)
+        console.log("[ftp-fs]","mkdir   ", path);
+        path = Path.resolve(this.cwd, path);
+        var item = await getItemByPath(Path.dirname(path));
+        await icloudDrive.mkdir(item, Path.basename(path));
     }
     async rename (oldPath, newPath) {
-        console.log("rename", oldPath, newPath)
+        console.log("[ftp-fs]","rename  ", oldPath, newPath);
+        throw new Error("Moving files not supported");
     }
     async chmod (path, mode) {
-        console.log("chmod", path, mode)
+        console.log("[ftp-fs]","chmod   ", path,mode);
+        throw new Error("Changing permissions not supported");
     }
     getUniqueName(fileName: string): string {
-        console.log("getUniqueName", fileName)
+        console.log("[ftp-fs]","getUnqNm", fileName);
         return fileName;
     }
 

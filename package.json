@@ -1,24 +1,24 @@
 {
-  "name": "icloud_fuse",
+  "name": "icloud_ftp",
   "version": "1.0.0",
-  "description": "iCloud FUSE file system",
+  "description": "iCloud ftp file system",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foxt/icloud_fuse.git"
+    "url": "git+https://github.com/foxt/icloud_ftp.git"
   },
   "author": "foxt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/foxt/icloud_fuse/issues"
+    "url": "https://github.com/foxt/icloud_ftp/issues"
   },
-  "homepage": "https://github.com/foxt/icloud_fuse#readme",
+  "homepage": "https://github.com/foxt/icloud_ftp#readme",
   "dependencies": {
     "ftp-srv": "^4.6.2",
-    "icloudjs": "^1.1.0",
+    "icloudjs": "^1.2.0",
     "input": "^1.0.1"
   },
   "devDependencies": {
