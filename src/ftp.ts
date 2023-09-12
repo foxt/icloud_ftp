@@ -1,7 +1,7 @@
 import { FileSystem } from "ftp-srv";
 import { iCloudDriveItem } from "icloudjs/build/services/drive";
 import { getItemByPath, getNodeByPath, icloudDrive } from "./icloud";
-const Path = require("path");
+const Path = require("path").posix;
 
 function itemToStat(item: iCloudDriveItem) {
     return {
@@ -26,8 +26,8 @@ export class FtpFS extends FileSystem {
         return Promise.resolve(this.cwd);
     }
     async get(path: string) {
-        console.log("[ftp-fs]","stat    ", path);
         path = Path.resolve(this.cwd, path);
+        console.log("[ftp-fs]","stat    ", path);
         
         if (path === "/") {
             return {

@@ -2,3 +2,7 @@ build/
 .vscode/
 node_modules
 .DS_Store
+
+*-arm64
+*-x64
+*.exe

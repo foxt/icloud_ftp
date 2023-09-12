@@ -17,7 +17,7 @@ icloud_ftp supports a advanced options set as environment variables. Use the `--
 | --- | --- | --- |
 | FileZilla | ✔️ | Tested on 3.65.0 |
 | Transmit | ✔️ | Tested on 5.7.0 |
-| Windows Explorer | ✔️ | Tested on Windows 11 22H2 |
+| Windows Explorer | ✔️ | Tested on Windows 11 22H2 - double clicking a file doesn't work, you need to copy it to your local machine first. |
 | GNOME Files | ❓ | Flaky, tested on Ubuntu 23.04 |
 | WinSCP | ❓ | Defaults to PASV mode. Thinks files are directories, so you can't open files. |
 | macOS Finder | ❌ | Empty directory listing. |
