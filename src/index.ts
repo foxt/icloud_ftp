@@ -14,6 +14,7 @@ if (process.argv.includes("--help")) {
     console.log("  ICFTP_HOST\t\tHost to listen on (default: ftp://127.0.0.1:9102. Be careful to not expose this, as there is no authentication)");
     console.log("  ICFTP_ALLOW_DELETE\tSet to true to allow deleting files (default: false)");
     console.log("  ICFTP_DEBUG\t\tSet to true to enable debug logging (default: false)");
+    console.log("  ICFTP_PASV_HOST\t\tIP addresse that clients can find the server on (default: 127.0.0.1)");
     process.exit(0);
 }
 function logC(severity, prefix) {
@@ -42,6 +43,7 @@ init().then(() => {
         log: logShim,
         url,
         anonymous: true,
+        pasv_url: process.env["ICFTP_PASV_HOST"] || "127.0.0.1"
     })
     server.on("login", (data, resolve) => {
         console.log("[  init]", "Client connected");
